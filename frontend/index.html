@@ -48,6 +48,12 @@
             font-size: 16px;
             display: none;
         }
+        #scaleamt {
+            display: none;
+        }
+        #dBoneamt{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -60,10 +66,10 @@
     <div id="itemList">
         <label for="Dragon Bones">Dragon Bones</label>
         <input type="checkbox" id="dBones" name="Dragon Bones">
-        <input type="text" class="amt" placeholder="amount">
+        <input type="text" class="amt" id="dBoneamt" placeholder="amount">
         <label for="scales">Zulrah Scales</label>
-        <input type="checkbox" id="scales "name="Zulrah Scales">
-        <input type="text" class="amt" placeholder="amount">
+        <input type="checkbox" id="scales" name="Zulrah Scales">
+        <input type="text" id="scaleamt" class="amt" placeholder="amount">
     </div>
     <p id="running">Monitor is now running</p>
     <button onclick="submit()">Submit</button>
