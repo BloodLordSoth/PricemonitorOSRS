@@ -40,6 +40,14 @@
             color: rgb(39, 120, 241);
             font-family: sans-serif;
         }
+        .amt{
+            width: 50px;
+        }
+        #running{
+            color: red;
+            font-size: 16px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -51,10 +59,14 @@
     </div>
     <div id="itemList">
         <label for="Dragon Bones">Dragon Bones</label>
-        <input type="checkbox" name="Dragon Bones">
+        <input type="checkbox" id="dBones" name="Dragon Bones">
+        <input type="text" class="amt" placeholder="amount">
         <label for="scales">Zulrah Scales</label>
-        <input type="checkbox" name="scales">
+        <input type="checkbox" id="scales "name="Zulrah Scales">
+        <input type="text" class="amt" placeholder="amount">
     </div>
-    <button type="submit">Submit</button>
+    <p id="running">Monitor is now running</p>
+    <button onclick="submit()">Submit</button>
 </body>
 </html>
+<script src="./script.js"></script>

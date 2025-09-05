@@ -1,19 +1,23 @@
 import puppeteer from 'puppeteer'
+import { sendMail } from './mailer.js'
 
-async function scrape(url){
+export async function scrape(url, targetPrice, user){
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto(url)
+    
+    const timer = setInterval(async () => {
+        await page.goto(url)
+        const name = await page.$eval('h2', res => res.textContent.trim())
+        const price = await page.$eval('h3 > span', res => res.textContent.trim())
+        console.log({Item: name, Price: price })
 
-    const name = await page.$eval('h2', res => res.textContent.trim())
-    const price = await page.$eval('h3 > span', res => res.textContent.trim())
+        if (price === targetPrice){
+            clearInterval(timer)
+            sendMail(user, name, price)
+            await browser.close()
+        }
 
-    console.log({Item: name, Price: price })
-    await browser.close()
+    }, 5000)
+
 }
-scrape('https://secure.runescape.com/m=itemdb_oldschool/Zulrah%27s+scales/viewitem?obj=12934')
-scrape('https://secure.runescape.com/m=itemdb_oldschool/Superior+dragon+bones/viewitem?obj=22124')
-scrape('https://secure.runescape.com/m=itemdb_oldschool/Dragon+bones/viewitem?obj=536')
-scrape('https://secure.runescape.com/m=itemdb_oldschool/Noxious+halberd/viewitem?obj=29796')
-scrape('https://secure.runescape.com/m=itemdb_oldschool/Venator+shard/viewitem?obj=27614')
-scrape('https://secure.runescape.com/m=itemdb_oldschool/Venator+ring/viewitem?obj=28310')
+
