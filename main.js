@@ -11,7 +11,7 @@ export async function scrape(url, targetPrice, user){
         const price = await page.$eval('h3 > span', res => res.textContent.trim())
         console.log({Item: name, Price: price })
 
-        if (price === targetPrice){
+        if (price <= targetPrice){
             clearInterval(timer)
             sendMail(user, name, price)
             await browser.close()

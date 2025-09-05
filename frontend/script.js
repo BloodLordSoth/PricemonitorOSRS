@@ -42,7 +42,7 @@ async function submit(){
     })
 
     if (!res.ok){
-        return window.alert('There was a server issue')
+        window.alert('There was a server issue')
     }
     
     console.log(`Email: ${email} Watching: ${arr}`)
