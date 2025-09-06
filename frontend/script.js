@@ -1,4 +1,3 @@
-const email = document.getElementById('email').value
 const dBones = document.getElementById('dBones')
 const scales = document.getElementById('scales')
 
@@ -12,6 +11,7 @@ dBones.addEventListener('change', () => {
 })
 
 async function submit(){
+    const email = document.getElementById('email').value
     const dboneamt = document.getElementById('dBoneamt').value
     const scaleamt = document.getElementById('scaleamt').value
     const running = document.getElementById('running')
@@ -41,10 +41,13 @@ async function submit(){
         body: JSON.stringify(dataObj)
     })
 
-    if (!res.ok){
-        window.alert('There was a server issue')
+    if (res.ok){
+        console.log(`Email: ${email} Watching: ${arr}`)
+        running.style.display = 'block'
+        return
     }
     
-    console.log(`Email: ${email} Watching: ${arr}`)
-    running.style.display = 'block'
+    console.log(`There was an error ${res.status} ${res.statusText}`)
+    window.alert('There was a server issue')
+    
 }

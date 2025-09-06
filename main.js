@@ -2,7 +2,10 @@ import puppeteer from 'puppeteer'
 import { sendMail } from './mailer.js'
 
 export async function scrape(url, targetPrice, user){
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    })
     const page = await browser.newPage()
     
     const timer = setInterval(async () => {
@@ -17,7 +20,7 @@ export async function scrape(url, targetPrice, user){
             await browser.close()
         }
 
-    }, 5000)
+    }, 20000)
 
 }
 

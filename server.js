@@ -32,8 +32,9 @@ app.post('/run', async (req, res) => {
         
         res.sendStatus(200)
     }
-    catch {
-        res.sendStatus(500)
+    catch (e) {
+        console.log(e)
+        res.send(500).send(e)
     }
 })
 
